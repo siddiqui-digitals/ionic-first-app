@@ -1,0 +1,25 @@
+<ion-content>
+    <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)"></ion-searchbar>
+    <ion-grid>
+      <ion-row class="header font-13">
+        <ion-col size="2" size-md>
+            Sr#
+        </ion-col>
+        <ion-col size="4" size-md>
+            Name
+        </ion-col>
+        <ion-col size="3" size-md>
+            Mobile
+        </ion-col>
+        <ion-col size="3" size-md>
+            Other
+        </ion-col>
+      </ion-row>
+      <ion-row class='font-13 tr' *ngFor="let d of data; let sr = index;" (click)="getBankDetail(d.pid)" id="rowId">
+        <ion-col class='td' size="2" size-md> {{ sr+1 }} </ion-col>
+        <ion-col class='td' size="4" size-md> {{ d.name }} </ion-col>
+        <ion-col class='td' size="3" size-md> {{ d.mobile }} </ion-col>
+        <ion-col class='td' size="3" size-md> {{ d.account_id }} </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>

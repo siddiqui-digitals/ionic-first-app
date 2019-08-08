@@ -1,0 +1,38 @@
+<ion-app>
+  <ion-split-pane>
+    <ion-menu  side="start" type="push">
+      <ion-header>            
+        <ion-toolbar color="primary">
+          <ion-title>DigitalSofts</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        
+        <div *ngFor="let p of appPages">
+            <ion-menu-toggle *ngIf="p.url">
+              <ion-item [routerLink]="p.url" routerDirection="root" routerLinkActive="active" >
+                <ion-icon [name]='p.icon' slot="start"></ion-icon>
+                <ion-label> {{ p.title }} </ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+            
+            <ion-item button *ngIf="p.children?.length > 0" (click)="p.open = !p.open" [class.active-parent]='p.open' default="false">
+              <ion-icon [name]='p.icon' slot="start"></ion-icon>
+              <ion-label> {{ p.title }} </ion-label>
+              <ion-icon slot="end" name="arrow.dropright" *ngIf="!p.open"></ion-icon>
+              <ion-icon slot="end" name="arrow.dropdown" *ngIf="p.open"></ion-icon>
+            </ion-item>
+            <ion-list *ngIf="p.open">
+              <ion-menu-toggle>
+                  <ion-item class="sub-item" *ngFor="let sub of p.children" [routerLink]="sub.url" routerDirection="root" routerLinkActive="active" >
+                    <ion-icon [name]='sub.icon' slot="start"></ion-icon>
+                    <ion-label> {{ sub.title }} </ion-label>
+                  </ion-item>
+                </ion-menu-toggle>
+            </ion-list>
+          </div>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>
